@@ -8,11 +8,56 @@ body {
 #content,
 mdx-content,
 #sidebar,
+#sidebar-content,
 #table-of-contents,
+#table-of-contents-content,
 #navbar,
 footer {
   direction: rtl;
   text-align: right;
+}
+
+/* Desktop layout: sidebar on the right, table of contents on the left */
+@media (min-width: 1024px) {
+  /* Main navigation sidebar → right edge */
+  #sidebar {
+    left: auto !important;
+    right: 0 !important;
+    border-left-width: 1px;
+    border-right-width: 0 !important;
+  }
+
+  /* Shift the page body so it no longer reserves space on the left */
+  :has(> #content-area) {
+    padding-left: 0 !important;
+    padding-right: var(--sidebar-width, 14rem) !important;
+    margin-left: 0 !important;
+  }
+
+  /* Page table of contents ("On this page") → left edge */
+  #table-of-contents,
+  #table-of-contents-layout {
+    left: 0 !important;
+    right: auto !important;
+    margin-left: 0 !important;
+  }
+
+  #table-of-contents-layout {
+    order: -1;
+  }
+}
+
+/* Sidebar items: icons and indentation mirrored */
+#sidebar-content ul,
+#sidebar-content li,
+toc-item {
+  text-align: right;
+}
+
+#sidebar-content ul ul {
+  padding-left: 0 !important;
+  padding-right: 1rem;
+  border-left: 0 !important;
 }
 
 /* Keep code, file paths, and diagrams left-to-right */
