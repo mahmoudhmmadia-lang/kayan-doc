@@ -1,4 +1,6 @@
-/* Force right-to-left layout for the Arabic guide */
+/* ============================================================
+   Arabic right-to-left layout
+   ============================================================ */
 html,
 body {
   direction: rtl;
@@ -17,37 +19,55 @@ footer {
   text-align: right;
 }
 
-/* Desktop layout: sidebar on the right, table of contents on the left */
+/* ============================================================
+   Desktop: main sidebar on the RIGHT, "On this page" on the LEFT
+   ============================================================ */
 @media (min-width: 1024px) {
-  /* Main navigation sidebar → right edge */
+  /* 1. Main navigation sidebar → right edge
+     (works whether the sidebar is fixed/sticky or a flex child) */
   #sidebar {
     left: auto !important;
     right: 0 !important;
-    border-left-width: 1px;
-    border-right-width: 0 !important;
+    inset-inline-start: auto !important;
+    border-right: 0 !important;
+    border-left: 1px solid rgba(127, 127, 127, 0.15) !important;
   }
 
-  /* Shift the page body so it no longer reserves space on the left */
-  :has(> #content-area) {
+  /* If the sidebar sits inside a flex row, reverse the row */
+  :has(> #sidebar) {
+    flex-direction: row-reverse !important;
+  }
+
+  /* 2. Move the space reserved for the sidebar from left to right.
+     Mintlify reserves it with Tailwind "lg:pl-*" / "lg:ml-*" classes. */
+  [class*="lg:pl-"]:has(#content-area),
+  [class*="lg:pl-"]:has(#content) {
     padding-left: 0 !important;
     padding-right: var(--sidebar-width, 14rem) !important;
-    margin-left: 0 !important;
   }
 
-  /* Page table of contents ("On this page") → left edge */
+  [class*="lg:ml-"]:has(#content-area),
+  [class*="lg:ml-"]:has(#content) {
+    margin-left: 0 !important;
+    margin-right: var(--sidebar-width, 14rem) !important;
+  }
+
+  /* 3. "On this page" (table of contents) → left side */
+  :has(> #table-of-contents),
+  :has(> #table-of-contents-layout) {
+    flex-direction: row-reverse !important;
+  }
+
   #table-of-contents,
   #table-of-contents-layout {
-    left: 0 !important;
     right: auto !important;
-    margin-left: 0 !important;
-  }
-
-  #table-of-contents-layout {
-    order: -1;
+    left: 0 !important;
   }
 }
 
-/* Sidebar items: icons and indentation mirrored */
+/* ============================================================
+   Sidebar items: mirror indentation and nested borders
+   ============================================================ */
 #sidebar-content ul,
 #sidebar-content li,
 toc-item {
@@ -56,11 +76,13 @@ toc-item {
 
 #sidebar-content ul ul {
   padding-left: 0 !important;
-  padding-right: 1rem;
+  padding-right: 1rem !important;
   border-left: 0 !important;
 }
 
-/* Keep code, file paths, and diagrams left-to-right */
+/* ============================================================
+   Keep code, file paths, and diagrams left-to-right
+   ============================================================ */
 pre,
 code,
 code-block,
