@@ -33,6 +33,19 @@ footer {
     border-left: 1px solid rgba(127, 127, 127, 0.15) !important;
   }
 
+  /* The element that actually pins the sidebar is a fixed/sticky wrapper
+     around #sidebar, so move that wrapper to the right too */
+  [class*="fixed"]:has(#sidebar-content):not(:has(#content-area)),
+  [class*="sticky"]:has(#sidebar-content):not(:has(#content-area)),
+  [style*="position"]:has(#sidebar-content):not(:has(#content-area)),
+  #sidebar-content {
+    left: auto !important;
+    right: 0 !important;
+    inset-inline-start: auto !important;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+
   /* If the sidebar sits inside a flex row, reverse the row */
   :has(> #sidebar) {
     flex-direction: row-reverse !important;
