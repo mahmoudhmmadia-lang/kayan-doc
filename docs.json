@@ -1,13 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "KayanOs - Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1BC47D",
+    "light": "#1BC47D",
+    "dark": "#3DD68C"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/s.png",
+    "dark": "/images/s.png"
+  },
   "navigation": {
     "pages": [
       {
@@ -36,19 +39,13 @@
   },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/images/logo-full-black-DvfLzt3m.png"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "subscribe",
+      "href": "https://kayanos.app/login?redirect=%2F&view=login"
     }
   },
   "contextual": {
@@ -62,12 +59,5 @@
       "cursor",
       "vscode"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }
