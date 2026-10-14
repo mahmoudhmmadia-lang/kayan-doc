@@ -1,0 +1,36 @@
+/* Force right-to-left layout for the Arabic guide */
+html,
+body {
+  direction: rtl;
+}
+
+#content-area,
+#content,
+mdx-content,
+#sidebar,
+#table-of-contents,
+#navbar,
+footer {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Keep code, file paths, and diagrams left-to-right */
+pre,
+code,
+code-block,
+.code-block,
+[data-component-name="mermaid-container"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Tables read right to left */
+table {
+  direction: rtl;
+}
+
+th,
+td {
+  text-align: right;
+}
