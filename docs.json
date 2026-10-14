@@ -1,19 +1,31 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "KayanOs - Documentation",
+  "theme": "luma",
+  "name": "KayanOS - دليل المستخدم",
   "colors": {
-    "primary": "#1BC47D",
+    "primary": "#00A378",
     "light": "#1BC47D",
-    "dark": "#3DD68C"
+    "dark": "#00A378"
   },
-  "favicon": {
-    "light": "/images/s.png",
-    "dark": "/images/s.png"
-  },
+  "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
-      "home"
+    "languages": [
+      {
+        "language": "ar",
+        "default": true,
+        "groups": [
+          {
+            "group": "دليل KayanOS",
+            "pages": [
+              "index",
+              "introduction",
+              "organization-setup",
+              "human-resources",
+              "technical-references"
+            ]
+          }
+        ]
+      }
     ]
   },
   "logo": {
@@ -23,8 +35,8 @@
   "navbar": {
     "primary": {
       "type": "button",
-      "label": "subscribe",
-      "href": "https://kayanos.app/login?redirect=%2F&view=login"
+      "label": "اشترك",
+      "href": "https://kayanos.app"
     }
   },
   "contextual": {
@@ -38,5 +50,17 @@
       "cursor",
       "vscode"
     ]
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "background": {
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#05070C"
+    }
+  },
+  "fonts": {
+    "family": "IBM Plex Sans Arabic"
   }
 }

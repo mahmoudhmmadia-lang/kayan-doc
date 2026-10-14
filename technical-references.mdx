@@ -1,0 +1,64 @@
+---
+title: "الملحق أ: مراجع المصادر التقنية لدليل KayanOS"
+sidebarTitle: "أ. المصادر التقنية"
+description: "مراجع المصادر التقنية التي بُني عليها كل فصل من دليل KayanOS، مع نتائج التحقق على بيئة الاختبار، ليتمكن الفريق التقني من مراجعتها ومطابقتها."
+icon: "code"
+---
+
+يجمع هذا الملحق المصادر التي بُني عليها كل فصل، ليتمكن الفريق التقني من مراجعتها. المسارات نسبية إلى مستودع KayanOS.
+
+## 1. الفصل 1: المقدمة والمفاهيم
+
+| الموضوع | المصدر |
+| :-- | :-- |
+| مشكلات العمل والقيمة والمصطلحات | `docs/start/overview.mdx`<br />`docs/start/core-concepts.mdx` |
+| الصلاحيات (مورد + فعل + نطاق) | `docs/start/roles-and-access.mdx` |
+| التنقل ومساحات العمل | `docs/start/navigate-kayanos.mdx`<br />`src/utils/sidebarItems.tsx`<br />`src/utils/navigationApps.ts`<br />`src/utils/dynamicApps.tsx` |
+| أسماء التطبيقات بالعربية | `src/locales/ar.ts (sidebar)`<br />`src/locales/workNavigationA.ar.ts` |
+| نوع المقعد | `common/seatPolicy.ts` |
+| لغات الواجهة | `src/locales/localeSearch.ts`<br />`src/locales/LocaleProvider.tsx` |
+| المنصات | `capacitor.config.ts`<br />`desktop/package.json` |
+| العمل دون اتصال | `src/offlineForms/`<br />`src/offline/`<br />`desktop/README.md` |
+| الكيانات والحقول والسجلات | `servers/shared/db/schema.generated.ts`<br />`(entities, entities_fields, entities_records)` |
+| الاستيراد من قوائم الكيانات | `src/components/Entities/EntityTablePage.tsx` |
+| الأدوار ودور المدير | `servers/auth/index.ts`<br />`supabase/migrations/ (on_organization_owner_set)` |
+
+**تحقّق على بيئة الاختبار (test2، 2026-10-13):** قائمة التطبيقات في مشغّل التطبيقات (الشكل 1.1). ظهر تطبيق «مكتبي» ضمن التطبيقات المضمّنة، وظهرت تطبيقات معرّفة من المؤسسة.
+
+## 2. الفصل 2: إنشاء المؤسسة والتهيئة
+
+| الموضوع | المصدر |
+| :-- | :-- |
+| خطوات الإنشاء وتحقق الحقول | `src/routes/create-organization.lazy.tsx`<br />`src/components/Auth/CreateOrg*Step.tsx` |
+| رمز التحقق ومدته | `servers/auth/utils/otp.ts` |
+| شروط النطاق الفرعي | `servers/auth/utils/subdomain.ts` |
+| إنشاء المؤسسة وعضو المدير | `servers/auth/index.ts (POST /api/auth/organizations)` |
+| ما يُنسخ عند الإنشاء | `supabase/migrations/20260905120000_fix_new_organization_payroll_seed_order.sql` |
+| إعدادات المؤسسة وقيمها الافتراضية | `src/routes/settings/organization/index.lazy.tsx` |
+| الحقول الإلزامية والعلاقات | `servers/shared/db/schema.generated.ts`<br />`temp/*.xlsx (import templates)` |
+| مطابقة الاستيراد (الرمز، التسمية) | `servers/entities/importPreview.ts`<br />`servers/entities/importUtils.ts` |
+| دعوات الأعضاء وأول دخول | `servers/auth/memberInvitations/service.ts`<br />`src/routes/first-login.tsx` |
+
+**تحقّق على بيئة الاختبار (test2، 2026-10-13):** خطوات صفحة «إنشاء مؤسسة» وترتيبها، وأسماء حقول «إعدادات المؤسسة» وقيمها، وعمود «التسمية» في صفحة المناصب. **لم يُختبر عملياً:** إنشاء مؤسسة جديدة، وشاشة الاستيراد، ووصول الدعوة.
+
+## 3. الفصل 3: الموارد البشرية
+
+| الموضوع | المصدر |
+| :-- | :-- |
+| صفحات التطبيق ومساراته | `src/utils/sidebarItems.tsx`<br />`src/components/Entities/nativeEntityPages/hrPages.tsx` |
+| أنواع الورديات والتحقق من الحقول | `src/components/Shifts/AddEditShiftPage.tsx`<br />`src/components/Shifts/WorkingHoursSection.tsx`<br />`src/components/Shifts/BreakSection.tsx`<br />`temp/*.xlsx (shift template)` |
+| أولوية الوردية والتجاوز | `src/utils/shiftInheritance.ts`<br />`src/components/Entities/EntityShiftField.tsx` |
+| سلم الرواتب | `src/components/Workforce/SalaryScale/SalaryScaleTable.tsx` |
+| الحضور والعطل | `src/routes/time/attendance/index.tsx`<br />`src/components/Time/Holidays/Holiday/holidayFormSchema.ts`<br />`src/components/Time/AttendancePolicy/` |
+| أنواع الإجازات وحقولها | `servers/shared/db/schema.generated.ts`<br />`common/locales/ar.ts`<br />`src/components/Entities/nativeEntityPages/hrPages.tsx` |
+| إنشاء الكشوف والرواتب المعتمدة | `src/components/Payrolls/create/useCreatePayrollFlow.tsx`<br />`src/components/Payrolls/create/createPayrollCandidates.ts` |
+| الأسماء العربية | `src/locales/ar.ts`<br />`common/locales/ar.ts` |
+| إنشاء القسائم والاحتساب وتأكيد الاعتماد | `src/components/SalarySlips/CreateSalarySlipsDialog.tsx`<br />`src/components/SalarySlips/SalarySlipItem/SalarySlipActions.tsx` |
+
+**حدود الشرح:** تفاصيل الحساب المالي والسياسات تعتمد على إعدادات المؤسسة. شرح نموذج «ماراثون» يقتصر على الحقول المثبتة في المصدر؛ لم تُستنتج دورة مناوبات أو راحات تلقائية من اسم النوع. مثال الأفق تدريبي، وليس إثباتاً لبيانات موجودة.
+
+**تحقّق على بيئة الاختبار (test2، 2026-10-13):** فُتح نموذج إضافة وردية باللغة العربية، وأُدخلت بيانات وهمية، واختيرت خمسة أيام عمل، وعُدّلت الاستراحة بأدوات الوقت إلى 13:00 حتى 13:30 داخل دوام 09:00 حتى 17:00. ظهر الإجمالي 07:30. حُفظت لقطة للنموذج فقط، دون بيانات شخصية. لم يُحفظ السجل في المؤسسة. **لم يُختبر عملياً:** حفظ الوردية ووراثتها، واستيرادها، واعتماد الإجازات، وتوليد الرواتب أو صرفها؛ شرحها مبني على المصادر.
+
+**تحقق إضافي للإصدار 0.3:** فُتح إجراء «إنشاء قسائم رواتب» على بيئة الاختبار، وتحقق ظهور «نهاية الفترة» ورسالة اختيارها قبل عرض الأعضاء. لم تُنشأ قسائم ولم يُختبر الاحتساب أو الاعتماد أو التوليد عملياً.
+
+**فرق القالب والنموذج:** قالب الورديات يعلّم ساعات العمل والمدة كإلزاميين، بينما يُظهر النموذج حقولاً مختلفة حسب النوع. لم تُختبر معاينة الاستيراد لهذه الحالات.
